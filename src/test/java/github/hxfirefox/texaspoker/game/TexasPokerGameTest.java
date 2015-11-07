@@ -81,6 +81,36 @@ public class TexasPokerGameTest {
     }
 
     @Test
+    public void should_pair_value_greater_one_win_when_both_had_pair() throws Exception {
+        // given
+        final Round playerRound =
+                new Round(new Card(B, 11), new Card(A, 9), new Card(D, 9), new Card(D, 5), new Card(A, 8));
+        final Round computerRound =
+                new Round(new Card(D, 4), new Card(B, 10), new Card(C, 10), new Card(C, 6), new Card(B, 12));
+        // when
+        final PokerResult result = game.play(playerRound, computerRound);
+        // then
+        assertThat(result.isSuccessful(), is(true));
+        assertThat(result.getWinner(), is(COMPUTER));
+        assertThat(result.getWinningRound(), is(computerRound));
+    }
+
+    @Test
+    public void should_high_card_value_greater_one_win_when_both_pair_equal() throws Exception {
+        // given
+        Round playerRound =
+                new Round(new Card(B, 11), new Card(A, 9), new Card(D, 9), new Card(D, 5), new Card(A, 8));
+        Round computerRound =
+                new Round(new Card(D, 10), new Card(A, 6), new Card(C, 9), new Card(B, 12), new Card(B, 9));
+        // when
+        final PokerResult result = game.play(playerRound, computerRound);
+        // then
+        assertThat(result.isSuccessful(), is(true));
+        assertThat(result.getWinner(), is(COMPUTER));
+        assertThat(result.getWinningRound(), is(computerRound));
+    }
+
+    @Test
     public void should_output_both_cards_in_round_and_winner_when_computer_win() throws Exception {
         // given
         final Round playerRound =
