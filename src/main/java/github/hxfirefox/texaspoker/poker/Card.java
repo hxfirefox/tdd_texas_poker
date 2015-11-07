@@ -43,4 +43,8 @@ public class Card {
     public String toString() {
         return String.format("%s%d", cardSuit, faceValue);
     }
+
+    public int compareTo(Card other) {
+        return Integer.compare(this.faceValue, other.getFaceValue());
+    }
 }

@@ -41,6 +41,39 @@ public class CardTest {
     }
 
     @Test
+    public void should_greater_when_face_value_greater() throws Exception {
+        // given
+        final Card cardC5 = new Card(C, 5);
+        final Card cardC7 = new Card(C, 7);
+        // when
+        final int compareResult = cardC7.compareTo(cardC5);
+        // then
+        assertThat(compareResult, is(1));
+    }
+
+    @Test
+    public void should_less_when_face_value_less() throws Exception {
+        // given
+        final Card cardC5 = new Card(C, 5);
+        final Card cardC7 = new Card(C, 7);
+        // when
+        final int compareResult = cardC5.compareTo(cardC7);
+        // then
+        assertThat(compareResult, is(-1));
+    }
+
+    @Test
+    public void should_equal_when_face_value_equal() throws Exception {
+        // given
+        final Card cardC5 = new Card(C, 5);
+        final Card cardD5 = new Card(D, 5);
+        // when
+        final int compareResult = cardC5.compareTo(cardD5);
+        // then
+        assertThat(compareResult, is(0));
+    }
+
+    @Test
     public void should_output_card_suit_and_face_value() throws Exception {
         // given
         final Card cardA3 = new Card(A, 3);

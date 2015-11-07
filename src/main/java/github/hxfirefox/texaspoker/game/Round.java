@@ -29,4 +29,20 @@ public class Round {
         }
         return output.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Round round = (Round) o;
+
+        return cardList.equals(round.cardList);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return cardList.hashCode();
+    }
 }
