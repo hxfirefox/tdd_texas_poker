@@ -13,9 +13,6 @@ import java.util.List;
 
 import static github.hxfirefox.texaspoker.game.GameWinner.*;
 
-/**
- * Created by »ÆÏè on 15-11-6.
- */
 public class HighCardRule extends PokerRule {
     private static final int MAX_NUMBER_CARDS = 5;
 
@@ -25,16 +22,12 @@ public class HighCardRule extends PokerRule {
         final List<Card> sortedComputerCards = sortDescending(computerRound.getAllCards());
 
         final GameWinner winner = generateGameWinner(sortedPlayerCards, sortedComputerCards);
-        final Round winningRound = generateWinningRound(playerRound, computerRound, winner);
+        final Round winningRound = generateWinningRound(winner, playerRound, computerRound);
 
         return new PokerResultBuilder().setSuccess(true)
                 .setWinner(winner)
                 .setWinningRound(winningRound)
                 .build();
-    }
-
-    private Round generateWinningRound(Round playerRound, Round computerRound, GameWinner winner) {
-        return winner == COMPUTER ? computerRound : playerRound;
     }
 
     private GameWinner generateGameWinner(List<Card> sortedPlayerCards, List<Card> sortedComputerCards) {

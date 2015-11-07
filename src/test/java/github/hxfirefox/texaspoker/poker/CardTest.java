@@ -6,9 +6,6 @@ import static github.hxfirefox.texaspoker.poker.CardSuit.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by »ÆÏè on 15-11-6.
- */
 public class CardTest {
     @Test
     public void should_be_equal_given_same_suit_and_face_value_card() throws Exception {

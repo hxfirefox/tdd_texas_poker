@@ -1,8 +1,5 @@
 package github.hxfirefox.texaspoker.game;
 
-/**
- * Created by »ÆÏè on 15-11-7.
- */
 public class PokerResultBuilder {
     private boolean isSuccess;
     private GameWinner winner;

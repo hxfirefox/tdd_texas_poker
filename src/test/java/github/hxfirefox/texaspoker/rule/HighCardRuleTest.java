@@ -12,9 +12,6 @@ import static github.hxfirefox.texaspoker.poker.CardSuit.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by »ÆÏè on 15-11-7.
- */
 public class HighCardRuleTest {
     @Test
     public void should_reorder_cards_in_round_by_descending() throws Exception {

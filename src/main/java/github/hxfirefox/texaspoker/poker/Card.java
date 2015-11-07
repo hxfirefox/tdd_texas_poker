@@ -1,8 +1,5 @@
 package github.hxfirefox.texaspoker.poker;
 
-/**
- * Created by »ÆÏè on 15-11-6.
- */
 public class Card {
     private final CardSuit cardSuit;
     private final int faceValue;

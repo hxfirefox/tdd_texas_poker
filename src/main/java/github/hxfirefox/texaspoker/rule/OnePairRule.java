@@ -41,10 +41,6 @@ public class OnePairRule extends PokerRule {
         return playerPairFaceValue == computerPairFaceValue;
     }
 
-    private Round generateWinningRound(GameWinner winner, Round playerRound, Round computerRound) {
-        return winner == PLAYER ? playerRound : computerRound;
-    }
-
     private GameWinner generateGameWinner(int playerPairFaceValue, int computerPairFaceValue) {
         return playerPairFaceValue > computerPairFaceValue ? PLAYER : COMPUTER;
     }

@@ -9,9 +9,6 @@ import static github.hxfirefox.texaspoker.poker.CardSuit.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by »ÆÏè on 15-11-6.
- */
 public class RoundTest {
     @Test
     public void should_get_copy_of_all_cards_in_round() throws Exception {

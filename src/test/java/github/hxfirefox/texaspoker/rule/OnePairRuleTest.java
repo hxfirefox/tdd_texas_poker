@@ -11,9 +11,6 @@ import static github.hxfirefox.texaspoker.poker.CardSuit.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by »ÆÏè on 15-11-7.
- */
 public class OnePairRuleTest {
     private OnePairRule rule;
 

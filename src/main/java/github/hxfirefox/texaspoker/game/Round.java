@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by »ÆÏè on 15-11-6.
- */
 public class Round {
     private List<Card> cardList = Lists.newArrayList();
 
