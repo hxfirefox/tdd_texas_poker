@@ -24,6 +24,6 @@ public abstract class PokerRule {
     public abstract PokerResult handle(Round playerRound, Round computerRound);
 
     public Round generateWinningRound(GameWinner winner, Round playerRound, Round computerRound) {
-        return winner == PLAYER ? playerRound : computerRound;
+        return winner == COMPUTER ? computerRound : playerRound;
     }
 }

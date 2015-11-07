@@ -1,9 +1,6 @@
 package github.hxfirefox.texaspoker.game;
 
-import github.hxfirefox.texaspoker.rule.CompositeRule;
-import github.hxfirefox.texaspoker.rule.HighCardRule;
-import github.hxfirefox.texaspoker.rule.OnePairRule;
-import github.hxfirefox.texaspoker.rule.PokerRule;
+import github.hxfirefox.texaspoker.rule.*;
 
 import static github.hxfirefox.texaspoker.game.GameWinner.*;
 
@@ -21,12 +18,14 @@ public class TexasPokerGame {
 
     private PokerRule compositeRule() {
         PokerRule pokerRule = new CompositeRule();
+        final FlushRule flushRule = new FlushRule();
         final OnePairRule onePairRule = new OnePairRule();
         final HighCardRule highCardRule = new HighCardRule();
 
-        pokerRule.setSuccessor(onePairRule);
-        pokerRule.setSuccessor(onePairRule);
+        pokerRule.setSuccessor(flushRule);
+        flushRule.setSuccessor(onePairRule);
         onePairRule.setSuccessor(highCardRule);
+
         return pokerRule;
     }
 

@@ -47,7 +47,7 @@ public class OnePairRuleTest {
         final Round playerRound =
                 new Round(new Card(D, 5), new Card(A, 4), new Card(C, 10), new Card(C, 6), new Card(B, 11));
         final Round computerRound =
-                new Round(new Card(A, 1), new Card(B, 1), new Card(C, 10), new Card(C, 6), new Card(B, 11));
+                new Round(new Card(A, 2), new Card(B, 2), new Card(C, 10), new Card(C, 6), new Card(B, 11));
         // when
         final PokerResult result = rule.handle(playerRound, computerRound);
         // then
@@ -62,7 +62,7 @@ public class OnePairRuleTest {
         final Round playerRound =
                 new Round(new Card(D, 5), new Card(A, 5), new Card(C, 10), new Card(C, 6), new Card(B, 11));
         final Round computerRound =
-                new Round(new Card(A, 11), new Card(B, 1), new Card(C, 10), new Card(C, 6), new Card(B, 11));
+                new Round(new Card(A, 11), new Card(B, 2), new Card(C, 10), new Card(C, 6), new Card(B, 11));
         // when
         final PokerResult result = rule.handle(playerRound, computerRound);
         // then
@@ -77,7 +77,7 @@ public class OnePairRuleTest {
         final Round playerRound =
                 new Round(new Card(D, 11), new Card(A, 5), new Card(C, 10), new Card(C, 6), new Card(C, 11));
         final Round computerRound =
-                new Round(new Card(A, 11), new Card(B, 1), new Card(C, 10), new Card(C, 6), new Card(B, 11));
+                new Round(new Card(A, 11), new Card(B, 2), new Card(C, 10), new Card(C, 6), new Card(B, 11));
         // when
         final PokerResult result = rule.handle(playerRound, computerRound);
         // then
@@ -88,9 +88,9 @@ public class OnePairRuleTest {
     public void should_return_fail_when_both_had_no_pair() throws Exception {
         // given
         final Round playerRound =
-                new Round(new Card(D, 1), new Card(A, 5), new Card(C, 10), new Card(C, 6), new Card(C, 11));
+                new Round(new Card(D, 2), new Card(A, 5), new Card(C, 10), new Card(C, 6), new Card(C, 11));
         final Round computerRound =
-                new Round(new Card(A, 12), new Card(B, 1), new Card(C, 10), new Card(C, 6), new Card(B, 11));
+                new Round(new Card(A, 12), new Card(B, 2), new Card(C, 10), new Card(C, 6), new Card(B, 11));
         // when
         final PokerResult result = rule.handle(playerRound, computerRound);
         // then

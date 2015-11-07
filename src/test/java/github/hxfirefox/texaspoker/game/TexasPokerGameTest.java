@@ -33,21 +33,6 @@ public class TexasPokerGameTest {
     }
 
     @Test
-    public void should_the_greatest_face_value_more_greater_one_win_when_both_high_card_no_matter_suit() throws Exception {
-        // given
-        final Round playerRound =
-                new Round(new Card(D, 3), new Card(D, 4), new Card(D, 5), new Card(D, 6), new Card(D, 7));
-        final Round computerRound =
-                new Round(new Card(D, 5), new Card(A, 6), new Card(C, 7), new Card(C, 8), new Card(B, 9));
-        // when
-        final PokerResult result = game.play(playerRound, computerRound);
-        // then
-        assertThat(result.isSuccessful(), is(true));
-        assertThat(result.getWinner(), is(COMPUTER));
-        assertThat(result.getWinningRound(), is(computerRound));
-    }
-
-    @Test
     public void should_the_second_greatest_face_value_more_greater_one_win_when_both_high_card_with_same_greatest() throws Exception {
         // given
         final Round playerRound =
@@ -99,6 +84,36 @@ public class TexasPokerGameTest {
                 new Round(new Card(B, 11), new Card(A, 9), new Card(D, 9), new Card(D, 5), new Card(A, 8));
         Round computerRound =
                 new Round(new Card(D, 10), new Card(A, 6), new Card(C, 9), new Card(B, 12), new Card(B, 9));
+        // when
+        final PokerResult result = game.play(playerRound, computerRound);
+        // then
+        assertThat(result.isSuccessful(), is(true));
+        assertThat(result.getWinner(), is(COMPUTER));
+        assertThat(result.getWinningRound(), is(computerRound));
+    }
+
+    @Test
+    public void should_one_has_flush_win_when_other_not() throws Exception {
+        // given
+        final Round playerRound =
+                new Round(new Card(B, 11), new Card(A, 2), new Card(A, 9), new Card(D, 11), new Card(A, 8));
+        final Round computerRound =
+                new Round(new Card(D, 4), new Card(D, 8), new Card(D, 5), new Card(D, 6), new Card(D, 12));
+        // when
+        final PokerResult result = game.play(playerRound, computerRound);
+        // then
+        assertThat(result.isSuccessful(), is(true));
+        assertThat(result.getWinner(), is(COMPUTER));
+        assertThat(result.getWinningRound(), is(computerRound));
+    }
+
+    @Test
+    public void should_high_card_greater_win_when_both_have_flush() throws Exception {
+        // given
+        final Round playerRound =
+                new Round(new Card(D, 3), new Card(D, 4), new Card(D, 5), new Card(D, 6), new Card(D, 7));
+        final Round computerRound =
+                new Round(new Card(B, 5), new Card(B, 6), new Card(B, 7), new Card(B, 8), new Card(B, 9));
         // when
         final PokerResult result = game.play(playerRound, computerRound);
         // then
