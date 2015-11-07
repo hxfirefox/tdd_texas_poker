@@ -2,7 +2,10 @@ package github.hxfirefox.texaspoker.game;
 
 import github.hxfirefox.texaspoker.rule.CompositeRule;
 import github.hxfirefox.texaspoker.rule.HighCardRule;
+import github.hxfirefox.texaspoker.rule.OnePairRule;
 import github.hxfirefox.texaspoker.rule.PokerRule;
+
+import static github.hxfirefox.texaspoker.game.GameWinner.*;
 
 /**
  * Created by »ÆÏè on 15-11-7.
@@ -18,7 +21,12 @@ public class TexasPokerGame {
 
     private PokerRule compositeRule() {
         PokerRule pokerRule = new CompositeRule();
-        pokerRule.setSuccessor(new HighCardRule());
+        final OnePairRule onePairRule = new OnePairRule();
+        final HighCardRule highCardRule = new HighCardRule();
+
+        pokerRule.setSuccessor(onePairRule);
+        pokerRule.setSuccessor(onePairRule);
+        onePairRule.setSuccessor(highCardRule);
         return pokerRule;
     }
 
@@ -30,7 +38,11 @@ public class TexasPokerGame {
         final StringBuilder builder = new StringBuilder();
         builder.append(playerRound.toString()).append("\n")
                 .append(computerRound.toString()).append("\n\n")
-                .append("Winner: ").append(result.getWinner().toString()).append("\n")
+                .append("Winner: ").append(result.getWinner().toString());
+        if (result.getWinner() == PLAYER) {
+            builder.append(" ").append(playerName);
+        }
+        builder.append("\n")
                 .append(result.getWinningRound().toString()).append("\n");
         return builder.toString();
     }

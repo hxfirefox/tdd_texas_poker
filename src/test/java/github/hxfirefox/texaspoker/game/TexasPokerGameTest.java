@@ -66,7 +66,22 @@ public class TexasPokerGameTest {
     }
 
     @Test
-    public void should_output_both_cards_in_round_and_winner() throws Exception {
+    public void should_pair_one_win_when_other_one_high_card() throws Exception {
+        // given
+        final Round playerRound =
+                new Round(new Card(B, 11), new Card(A, 2), new Card(A, 9), new Card(D, 10), new Card(A, 8));
+        final Round computerRound =
+                new Round(new Card(D, 4), new Card(A, 4), new Card(C, 10), new Card(C, 6), new Card(B, 11));
+        // when
+        final PokerResult result = game.play(playerRound, computerRound);
+        // then
+        assertThat(result.isSuccessful(), is(true));
+        assertThat(result.getWinner(), is(COMPUTER));
+        assertThat(result.getWinningRound(), is(computerRound));
+    }
+
+    @Test
+    public void should_output_both_cards_in_round_and_winner_when_computer_win() throws Exception {
         // given
         final Round playerRound =
                 new Round(new Card(B, 11), new Card(A, 2), new Card(A, 9), new Card(D, 10), new Card(A, 8));
@@ -80,6 +95,24 @@ public class TexasPokerGameTest {
                 "D4, A8, C5, C6, B12\n\n" +
                 "Winner: COMPUTER\n" +
                 "D4, A8, C5, C6, B12\n";
+        assertThat(output, is(expectOutput));
+    }
+
+    @Test
+    public void should_output_both_cards_in_round_and_winner_name_when_player_win() throws Exception {
+        // given
+        final Round playerRound =
+                new Round(new Card(B, 13), new Card(A, 2), new Card(A, 9), new Card(D, 10), new Card(A, 8));
+        final Round computerRound =
+                new Round(new Card(D, 4), new Card(A, 8), new Card(C, 5), new Card(C, 6), new Card(B, 12));
+        // when
+        final PokerResult result = game.play(playerRound, computerRound);
+        final String output = game.outputFinalResult(playerRound, computerRound, result);
+        // then
+        String expectOutput = "B13, A2, A9, D10, A8\n" +
+                "D4, A8, C5, C6, B12\n\n" +
+                "Winner: PLAYER Tom\n" +
+                "B13, A2, A9, D10, A8\n";
         assertThat(output, is(expectOutput));
     }
 }
