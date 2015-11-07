@@ -1,6 +1,7 @@
 package github.hxfirefox.texaspoker.rule;
 
 import com.google.common.annotations.VisibleForTesting;
+import github.hxfirefox.texaspoker.game.GameWinner;
 import github.hxfirefox.texaspoker.game.PokerResult;
 import github.hxfirefox.texaspoker.game.PokerResultBuilder;
 import github.hxfirefox.texaspoker.game.Round;
@@ -15,7 +16,7 @@ import static github.hxfirefox.texaspoker.game.GameWinner.*;
 /**
  * Created by »ÆÏè on 15-11-6.
  */
-public class HighCardRule extends PokerRule{
+public class HighCardRule extends PokerRule {
     private static final int MAX_NUMBER_CARDS = 5;
 
     @Override
@@ -23,27 +24,32 @@ public class HighCardRule extends PokerRule{
         final List<Card> sortedPlayerCards = sortDescending(playerRound.getAllCards());
         final List<Card> sortedComputerCards = sortDescending(computerRound.getAllCards());
 
-        final PokerResultBuilder resultBuilder = new PokerResultBuilder();
-        for(int index = 0; index < MAX_NUMBER_CARDS; index++) {
+        final GameWinner winner = generateGameWinner(sortedPlayerCards, sortedComputerCards);
+        final Round winningRound = generateWinningRound(playerRound, computerRound, winner);
+
+        return new PokerResultBuilder().setSuccess(true)
+                .setWinner(winner)
+                .setWinningRound(winningRound)
+                .build();
+    }
+
+    private Round generateWinningRound(Round playerRound, Round computerRound, GameWinner winner) {
+        return winner == COMPUTER ? computerRound : playerRound;
+    }
+
+    private GameWinner generateGameWinner(List<Card> sortedPlayerCards, List<Card> sortedComputerCards) {
+        GameWinner winner = DRAW;
+        for (int index = 0; index < MAX_NUMBER_CARDS; index++) {
             final int compare = sortedPlayerCards.get(index).compareTo(sortedComputerCards.get(index));
             if (compare == 1) {
-                return resultBuilder
-                        .setSuccess(true)
-                        .setWinner(PLAYER)
-                        .setWinningRound(playerRound)
-                        .build();
+                winner = PLAYER;
+                break;
             } else if (compare == -1) {
-                return resultBuilder
-                        .setSuccess(true)
-                        .setWinner(COMPUTER)
-                        .setWinningRound(computerRound)
-                        .build();
+                winner = COMPUTER;
+                break;
             }
         }
-        return resultBuilder.setSuccess(true)
-                .setWinner(DRAW)
-                .setWinningRound(playerRound)
-                .build();
+        return winner;
     }
 
     @VisibleForTesting

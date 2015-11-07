@@ -35,4 +35,34 @@ public class RoundTest {
         // then
         assertThat(output, is("C4D11A2"));
     }
+
+    @Test
+    public void should_be_equal_when_all_cards_in_round_same_suit_and_face_value() throws Exception {
+        // given
+        final Round round = new Round(new Card(D, 3), new Card(C, 12), new Card(A, 1));
+        final Round otherRound = new Round(new Card(D, 3), new Card(C, 12), new Card(A, 1));
+        // when
+        // then
+        assertThat(round.equals(otherRound), is(true));
+    }
+
+    @Test
+    public void should_be_equal_when_all_cards_in_round_different_suit_but_same_face_value() throws Exception {
+        // given
+        final Round round = new Round(new Card(D, 3), new Card(C, 12), new Card(A, 1));
+        final Round otherRound = new Round(new Card(A, 3), new Card(D, 12), new Card(A, 1));
+        // when
+        // then
+        assertThat(round.equals(otherRound), is(false));
+    }
+
+    @Test
+    public void should_be_equal_when_all_cards_in_round_same_suit_but_different_face_value() throws Exception {
+        // given
+        final Round round = new Round(new Card(D, 3), new Card(C, 12), new Card(A, 1));
+        final Round otherRound = new Round(new Card(D, 4), new Card(C, 11), new Card(A, 1));
+        // when
+        // then
+        assertThat(round.equals(otherRound), is(false));
+    }
 }
