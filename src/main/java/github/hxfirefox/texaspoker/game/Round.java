@@ -24,10 +24,19 @@ public class Round {
     @Override
     public String toString() {
         final StringBuilder output = new StringBuilder();
-        for (Card card:cardList) {
-            output.append(card.toString());
+
+        for (int index = 0; index < cardList.size(); index++) {
+            output.append(cardList.get(index).toString());
+            if (!isLastOfCards(index)) {
+                output.append(", ");
+            }
         }
+
         return output.toString();
+    }
+
+    private boolean isLastOfCards(int index) {
+        return index == cardList.size() - 1;
     }
 
     @Override

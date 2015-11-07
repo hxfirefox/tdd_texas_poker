@@ -33,7 +33,7 @@ public class RoundTest {
         // when
         final String output = round.toString();
         // then
-        assertThat(output, is("C4D11A2"));
+        assertThat(output, is("C4, D11, A2"));
     }
 
     @Test
