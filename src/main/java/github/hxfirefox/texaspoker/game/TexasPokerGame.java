@@ -5,7 +5,7 @@ import github.hxfirefox.texaspoker.rule.*;
 import static github.hxfirefox.texaspoker.game.GameWinner.*;
 
 /**
- * Created by »ÆÏè on 15-11-7.
+ * Created by ï¿½ï¿½ï¿½ï¿½ on 15-11-7.
  */
 public class TexasPokerGame {
     private PokerRule pokerRule;
@@ -34,15 +34,34 @@ public class TexasPokerGame {
     }
 
     public String outputFinalResult(Round playerRound, Round computerRound, PokerResult result) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(playerRound.toString()).append("\n")
-                .append(computerRound.toString()).append("\n\n")
-                .append("Winner: ").append(result.getWinner().toString());
-        if (result.getWinner() == PLAYER) {
+        StringBuilder builder = outputBothSidesRound(playerRound, computerRound);
+        outputWinner(result, builder);
+        outputWinnerRound(result, builder);
+
+        return builder.toString();
+    }
+
+    private void outputWinnerRound(PokerResult result, StringBuilder builder) {
+        builder.append("\n")
+                .append(result.getWinningRound().toString())
+                .append("\n");
+    }
+
+    private void outputWinner(PokerResult result, StringBuilder builder) {
+        builder.append("Winner: ").append(result.getWinner().toString());
+        if (isWinnerPlayer(result)) {
             builder.append(" ").append(playerName);
         }
-        builder.append("\n")
-                .append(result.getWinningRound().toString()).append("\n");
-        return builder.toString();
+    }
+
+    private StringBuilder outputBothSidesRound(Round playerRound, Round computerRound) {
+        final StringBuilder builder = new StringBuilder()
+                .append(playerRound.toString()).append("\n")
+                .append(computerRound.toString()).append("\n\n");
+        return builder;
+    }
+
+    private boolean isWinnerPlayer(PokerResult result) {
+        return result.getWinner() == PLAYER;
     }
 }

@@ -17,6 +17,7 @@ import static github.hxfirefox.texaspoker.game.GameWinner.*;
  */
 public class FlushRule extends PokerRule {
     private static final int FIRST = 0;
+    public static final int SECOND = 1;
 
     @Override
     public PokerResult handle(Round playerRound, Round computerRound) {
@@ -46,7 +47,7 @@ public class FlushRule extends PokerRule {
         HashSet<CardSuit> cardSuitSet = new HashSet();
 
         cardSuitSet.add(allCards.get(FIRST).getCardSuit());
-        for (int index = 1; index < allCards.size(); index++) {
+        for (int index = SECOND; index < allCards.size(); index++) {
             if (cardSuitSet.add(allCards.get(index).getCardSuit())) {
                 return false;
             }

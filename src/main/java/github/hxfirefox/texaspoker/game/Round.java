@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Round {
+    public static final String SEPARATOR_COMMA = ", ";
     private List<Card> cardList = Lists.newArrayList();
 
     public Round(Card... cards) {
@@ -25,7 +26,7 @@ public class Round {
         for (int index = 0; index < cardList.size(); index++) {
             output.append(cardList.get(index).toString());
             if (!isLastOfCards(index)) {
-                output.append(", ");
+                output.append(SEPARATOR_COMMA);
             }
         }
 
