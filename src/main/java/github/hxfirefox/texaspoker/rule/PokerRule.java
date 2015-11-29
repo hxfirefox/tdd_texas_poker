@@ -15,10 +15,14 @@ public abstract class PokerRule {
 
     public PokerResult withRule(Round playerRound, Round computerRound) {
         PokerResult result = handle(playerRound, computerRound);
-        if (!result.isSuccessful() && successor != null) {
+        if (isResultFailAndHasSuccessor(result)) {
             return successor.withRule(playerRound, computerRound);
         }
         return result;
+    }
+
+    private boolean isResultFailAndHasSuccessor(PokerResult result) {
+        return !result.isSuccessful() && successor != null;
     }
 
     public abstract PokerResult handle(Round playerRound, Round computerRound);
