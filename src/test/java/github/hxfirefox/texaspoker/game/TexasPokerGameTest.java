@@ -1,10 +1,10 @@
 package github.hxfirefox.texaspoker.game;
 
-import github.hxfirefox.texaspoker.poker.Card;
 import org.junit.Before;
 import org.junit.Test;
 
 import static github.hxfirefox.texaspoker.game.GameWinner.*;
+import static github.hxfirefox.texaspoker.poker.Card.card;
 import static github.hxfirefox.texaspoker.poker.CardSuit.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -21,9 +21,9 @@ public class TexasPokerGameTest {
     public void should_the_greatest_face_value_more_greater_one_win_when_both_high_card() throws Exception {
         // given
         final Round playerRound =
-                new Round(new Card(B, 11), new Card(A, 2), new Card(A, 9), new Card(D, 10), new Card(A, 8));
+                new Round(card(B, 11), card(A, 2), card(A, 9), card(D, 10), card(A, 8));
         final Round computerRound =
-                new Round(new Card(D, 4), new Card(A, 8), new Card(C, 5), new Card(C, 6), new Card(B, 12));
+                new Round(card(D, 4), card(A, 8), card(C, 5), card(C, 6), card(B, 12));
         // when
         final PokerResult result = game.play(playerRound, computerRound);
         // then
@@ -36,9 +36,9 @@ public class TexasPokerGameTest {
     public void should_the_second_greatest_face_value_more_greater_one_win_when_both_high_card_with_same_greatest() throws Exception {
         // given
         final Round playerRound =
-                new Round(new Card(B, 11), new Card(A, 2), new Card(A, 9), new Card(D, 10), new Card(A, 8));
+                new Round(card(B, 11), card(A, 2), card(A, 9), card(D, 10), card(A, 8));
         final Round computerRound =
-                new Round(new Card(D, 4), new Card(A, 8), new Card(C, 10), new Card(C, 6), new Card(B, 11));
+                new Round(card(D, 4), card(A, 8), card(C, 10), card(C, 6), card(B, 11));
         // when
         final PokerResult result = game.play(playerRound, computerRound);
         // then
@@ -51,9 +51,9 @@ public class TexasPokerGameTest {
     public void should_pair_one_win_when_other_one_high_card() throws Exception {
         // given
         final Round playerRound =
-                new Round(new Card(B, 11), new Card(A, 2), new Card(A, 9), new Card(D, 10), new Card(A, 8));
+                new Round(card(B, 11), card(A, 2), card(A, 9), card(D, 10), card(A, 8));
         final Round computerRound =
-                new Round(new Card(D, 4), new Card(A, 4), new Card(C, 10), new Card(C, 6), new Card(B, 11));
+                new Round(card(D, 4), card(A, 4), card(C, 10), card(C, 6), card(B, 11));
         // when
         final PokerResult result = game.play(playerRound, computerRound);
         // then
@@ -66,9 +66,9 @@ public class TexasPokerGameTest {
     public void should_pair_value_greater_one_win_when_both_had_pair() throws Exception {
         // given
         final Round playerRound =
-                new Round(new Card(B, 11), new Card(A, 9), new Card(D, 9), new Card(D, 5), new Card(A, 8));
+                new Round(card(B, 11), card(A, 9), card(D, 9), card(D, 5), card(A, 8));
         final Round computerRound =
-                new Round(new Card(D, 4), new Card(B, 10), new Card(C, 10), new Card(C, 6), new Card(B, 12));
+                new Round(card(D, 4), card(B, 10), card(C, 10), card(C, 6), card(B, 12));
         // when
         final PokerResult result = game.play(playerRound, computerRound);
         // then
@@ -81,9 +81,9 @@ public class TexasPokerGameTest {
     public void should_high_card_value_greater_one_win_when_both_pair_equal() throws Exception {
         // given
         Round playerRound =
-                new Round(new Card(B, 11), new Card(A, 9), new Card(D, 9), new Card(D, 5), new Card(A, 8));
+                new Round(card(B, 11), card(A, 9), card(D, 9), card(D, 5), card(A, 8));
         Round computerRound =
-                new Round(new Card(D, 10), new Card(A, 6), new Card(C, 9), new Card(B, 12), new Card(B, 9));
+                new Round(card(D, 10), card(A, 6), card(C, 9), card(B, 12), card(B, 9));
         // when
         final PokerResult result = game.play(playerRound, computerRound);
         // then
@@ -96,9 +96,9 @@ public class TexasPokerGameTest {
     public void should_one_has_flush_win_when_other_not() throws Exception {
         // given
         final Round playerRound =
-                new Round(new Card(B, 11), new Card(A, 2), new Card(A, 9), new Card(D, 11), new Card(A, 8));
+                new Round(card(B, 11), card(A, 2), card(A, 9), card(D, 11), card(A, 8));
         final Round computerRound =
-                new Round(new Card(D, 4), new Card(D, 8), new Card(D, 5), new Card(D, 6), new Card(D, 12));
+                new Round(card(D, 4), card(D, 8), card(D, 5), card(D, 6), card(D, 12));
         // when
         final PokerResult result = game.play(playerRound, computerRound);
         // then
@@ -111,9 +111,9 @@ public class TexasPokerGameTest {
     public void should_high_card_greater_win_when_both_have_flush() throws Exception {
         // given
         final Round playerRound =
-                new Round(new Card(D, 3), new Card(D, 4), new Card(D, 5), new Card(D, 6), new Card(D, 7));
+                new Round(card(D, 3), card(D, 4), card(D, 5), card(D, 6), card(D, 7));
         final Round computerRound =
-                new Round(new Card(B, 5), new Card(B, 6), new Card(B, 7), new Card(B, 8), new Card(B, 9));
+                new Round(card(B, 5), card(B, 6), card(B, 7), card(B, 8), card(B, 9));
         // when
         final PokerResult result = game.play(playerRound, computerRound);
         // then
@@ -126,9 +126,9 @@ public class TexasPokerGameTest {
     public void should_output_both_cards_in_round_and_winner_when_computer_win() throws Exception {
         // given
         final Round playerRound =
-                new Round(new Card(B, 11), new Card(A, 2), new Card(A, 9), new Card(D, 10), new Card(A, 8));
+                new Round(card(B, 11), card(A, 2), card(A, 9), card(D, 10), card(A, 8));
         final Round computerRound =
-                new Round(new Card(D, 4), new Card(A, 8), new Card(C, 5), new Card(C, 6), new Card(B, 12));
+                new Round(card(D, 4), card(A, 8), card(C, 5), card(C, 6), card(B, 12));
         // when
         final PokerResult result = game.play(playerRound, computerRound);
         final String output = game.outputFinalResult(playerRound, computerRound, result);
@@ -144,9 +144,9 @@ public class TexasPokerGameTest {
     public void should_output_both_cards_in_round_and_winner_name_when_player_win() throws Exception {
         // given
         final Round playerRound =
-                new Round(new Card(B, 13), new Card(A, 2), new Card(A, 9), new Card(D, 10), new Card(A, 8));
+                new Round(card(B, 13), card(A, 2), card(A, 9), card(D, 10), card(A, 8));
         final Round computerRound =
-                new Round(new Card(D, 4), new Card(A, 8), new Card(C, 5), new Card(C, 6), new Card(B, 12));
+                new Round(card(D, 4), card(A, 8), card(C, 5), card(C, 6), card(B, 12));
         // when
         final PokerResult result = game.play(playerRound, computerRound);
         final String output = game.outputFinalResult(playerRound, computerRound, result);

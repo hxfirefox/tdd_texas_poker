@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static github.hxfirefox.texaspoker.game.GameWinner.PLAYER;
+import static github.hxfirefox.texaspoker.poker.Card.*;
 import static github.hxfirefox.texaspoker.poker.CardSuit.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -26,7 +27,7 @@ public class FlushRuleTest {
     public void should_return_true_when_cards_flush() throws Exception {
         // given
         Round round =
-                new Round(new Card(D, 3), new Card(D, 4), new Card(D, 5), new Card(D, 6), new Card(D, 7));
+                new Round(card(D, 3), card(D, 4), card(D, 5), card(D, 6), card(D, 7));
         // when
         final boolean hasFlush = rule.hasFlush(round.getAllCards());
         // then
@@ -37,7 +38,7 @@ public class FlushRuleTest {
     public void should_return_false_when_cards_not_flush() throws Exception {
         // given
         Round round =
-                new Round(new Card(A, 3), new Card(C, 4), new Card(D, 5), new Card(D, 6), new Card(D, 7));
+                new Round(card(A, 3), card(C, 4), card(D, 5), card(D, 6), card(D, 7));
         // when
         final boolean hasFlush = rule.hasFlush(round.getAllCards());
         // then
@@ -48,9 +49,9 @@ public class FlushRuleTest {
     public void should_return_winner_and_round_when_one_has_flush_other_pair() throws Exception {
         // given
         Round playerRound =
-                new Round(new Card(D, 3), new Card(D, 4), new Card(D, 5), new Card(D, 6), new Card(D, 7));
+                new Round(card(D, 3), card(D, 4), card(D, 5), card(D, 6), card(D, 7));
         Round computerRound =
-                new Round(new Card(D, 3), new Card(B, 3), new Card(A, 5), new Card(D, 6), new Card(D, 7));
+                new Round(card(D, 3), card(B, 3), card(A, 5), card(D, 6), card(D, 7));
         // when
         final PokerResult result = rule.withRule(playerRound, computerRound);
         // then
@@ -63,9 +64,9 @@ public class FlushRuleTest {
     public void should_return_winner_and_round_when_one_has_flush_other_high_card() throws Exception {
         // given
         Round playerRound =
-                new Round(new Card(D, 3), new Card(D, 4), new Card(D, 5), new Card(D, 6), new Card(D, 7));
+                new Round(card(D, 3), card(D, 4), card(D, 5), card(D, 6), card(D, 7));
         Round computerRound =
-                new Round(new Card(D, 2), new Card(B, 3), new Card(A, 5), new Card(D, 9), new Card(D, 7));
+                new Round(card(D, 2), card(B, 3), card(A, 5), card(D, 9), card(D, 7));
         // when
         final PokerResult result = rule.withRule(playerRound, computerRound);
         // then
@@ -78,9 +79,9 @@ public class FlushRuleTest {
     public void should_return_fail_when_both_have_flush() throws Exception {
         // given
         Round playerRound =
-                new Round(new Card(D, 3), new Card(D, 4), new Card(D, 5), new Card(D, 6), new Card(D, 7));
+                new Round(card(D, 3), card(D, 4), card(D, 5), card(D, 6), card(D, 7));
         Round computerRound =
-                new Round(new Card(A, 2), new Card(A, 3), new Card(A, 5), new Card(A, 9), new Card(A, 7));
+                new Round(card(A, 2), card(A, 3), card(A, 5), card(A, 9), card(A, 7));
         // when
         final PokerResult result = rule.withRule(playerRound, computerRound);
         // then

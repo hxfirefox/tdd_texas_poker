@@ -4,9 +4,13 @@ public class Card {
     private final CardSuit cardSuit;
     private final int faceValue;
 
-    public Card(CardSuit cardSuit, int faceValue) {
+    private Card(CardSuit cardSuit, int faceValue) {
         this.cardSuit = cardSuit;
         this.faceValue = faceValue;
+    }
+
+    public static Card card(CardSuit cardSuit, int faceValue) {
+        return new Card(cardSuit, faceValue);
     }
 
     public CardSuit getCardSuit() {
